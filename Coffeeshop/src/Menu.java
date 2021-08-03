@@ -43,7 +43,7 @@ public class Menu { // 선언(정의) only. not 실행코드
 
 	void showMenu() {
 		for (int i = 0; i < this.alName.size(); i++) {
-			System.out.println(i+1+". "+this.alName.get(i) + "\t" + this.alPrice.get(i));
+			System.out.println((i+1)+". "+this.alName.get(i) + "\t" + this.alPrice.get(i));
 		}
 		
 	}
