@@ -9,17 +9,21 @@ public class Menu { // 선언(정의) only. not 실행코드
 	private ArrayList<String> alName;
 	private ArrayList<Integer> alPrice;
 
-	/*
-	 * Menu() { alName=new ArrayList<String>(); alPrice=new ArrayList<Integer>();
-	 * this.load();
-	 * 
-	 * addName("Americano"); addName("Espresso"); addName("Latte"); addPrice(2000);
-	 * addPrice(2500); addPrice(3000);
-	 * 
-	 * showMenu();
-	 * 
-	 * }
-	 */
+	
+	  Menu() {
+		  alName=new ArrayList<String>(); 
+		  alPrice=new ArrayList<Integer>();
+		  this.load();
+	  
+			/*
+			 * addName("Americano"); addName("Espresso"); addName("Latte"); addPrice(2000);
+			 * addPrice(2500); addPrice(3000);
+			 * 
+			 * showMenu();
+			 */
+	  
+	  }
+	 
 	
 	/*
 	 * 생성자 - 일종의 메소드 용도: 주로 초기화 작업용. 명명법: 이름이 클래스와 같아야 함. 반환값: 반환값이 없다.(반환할 수 없이,
