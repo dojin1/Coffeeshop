@@ -1,13 +1,16 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Menu { // 선언(정의) only. not 실행코드
 	private ArrayList<String> alName;
 	private ArrayList<Integer> alPrice;
+	
 
 	
 	  Menu() {
@@ -40,7 +43,14 @@ public class Menu { // 선언(정의) only. not 실행코드
 	void addPrice(String price) {
 		this.alPrice.add(Integer.parseInt(price));
 	}
-
+	void changeMenu(int menu_num,String name,int price) {
+		this.alName.set(menu_num-1, name);
+		this.alPrice.set(menu_num-1, price);
+	}
+	void deleteMenu(int menu_num) {
+		this.alName.remove(menu_num-1);
+		this.alPrice.remove(menu_num-1);
+	}
 	void showMenu() {
 		for (int i = 0; i < this.alName.size(); i++) {
 			System.out.println((i+1)+". "+this.alName.get(i) + "\t" + this.alPrice.get(i));
@@ -49,6 +59,23 @@ public class Menu { // 선언(정의) only. not 실행코드
 	}
 
 	void save() { // arraylist alName,alPrice를 파일(menu.txt)에 저장
+		File file=new File("c:/temp/menu.txt");
+		if(file.exists()) {
+			try {
+				BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+				for(int i=0;i<this.alName.size();i++) {
+					String line = this.alName.get(i)+","+this.alPrice.get(i);
+					writer.write(line);
+					if((i+1)!=this.alName.size())
+						writer.write("\r\n");
+				}
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 

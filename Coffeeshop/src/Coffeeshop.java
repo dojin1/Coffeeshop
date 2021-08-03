@@ -12,31 +12,45 @@ public class Coffeeshop {
 		// s: 실적보기
 		// x: 프로그램 종료.
 		Scanner s=new Scanner(System.in);
+		Scanner sc=new Scanner(System.in);
 		System.out.println("<단축키를 입력해 주세요.> m:메뉴관리,o:주문받기,s:실적받기, 'x'또는'X' 입력시 프로그램 종료");
 		String n=s.nextLine();
+		
 		while(!n.equals("x")) {
 			if(n.equals("m") || n.equals("M")) {
 				System.out.println("메뉴관리");
 				menu.showMenu();
 				// CRUD(추가/조회/수정/삭제)
 				System.out.println("메뉴작업을 선택하시오.(c:추가,r:목록보기,u:수정,d:삭제,q:메뉴관리 종료)");
-				n=s.nextLine();
-				// "q"가 아닌 동안
-				// "c":새메뉴추가 작업 출력
-				// "r":목록보기 출력
-				// "u":기존메뉴 수정(이름/가격) 수정출력
-				// "d":기존메뉴 삭제 삭제출력
-				// 메뉴작업을 선택하시오(...) 출력
-				// 새값을 읽는다.
-				while(!n.equals("q")) {
-					if(n.equals("c") || n.equals("C")) {
-						System.out.println("새 메뉴 추가작업");
-					}else if(n.equals("r") || n.equals("R")) {
-						System.out.println("목록보기");
-					}else if(n.equals("u") || n.equals("U")) {
-						System.out.println("기존메뉴 수정(이름/가격)");
-					}else if(n.equals("d") || n.equals("D")) {
-						System.out.println("기존메뉴 삭제");
+				n=s.nextLine();	
+				while(!n.equals("q")) { // "q"가 아닌 동안
+					if(n.equals("c") || n.equals("C")) { // "c":새메뉴추가 작업 출력
+						System.out.println("새 메뉴 추가작업. 새 메뉴명을 입력해 주세요");
+						n=s.nextLine();// 새메뉴명 읽기
+						menu.addName(n);// 메뉴명 추가 add name
+						System.out.println("가격을 입력해 주세요");
+						n=s.nextLine();	// 새가격 읽기
+						menu.addPrice(n);// 메뉴가격 추가 add price
+						System.out.println("추가완료 'r'키로 추가된 목록확인");
+					}else if(n.equals("r") || n.equals("R")) { // "r":목록보기 출력
+						menu.showMenu();// 메뉴목록보기.
+						System.out.println("메뉴작업을 선택하세요.(c:추가,r:목록보기,u:수정,d:삭제,q:메뉴관리 종료)");
+					}else if(n.equals("u") || n.equals("U")) { // "u":기존메뉴 수정(이름/가격) 수정출력
+						System.out.println("기존메뉴 수정(이름/가격) 수정할 메뉴번호를 입력해 주세요");
+						int a=sc.nextInt();// 수정할 메뉴번호 읽기
+						System.out.println("수정할 메뉴명을 입력해 주세요.");
+						n=s.nextLine();// 수정할 메뉴명 읽기
+						System.out.println("수정할 가격을 입력해 주세요.");
+						int c=sc.nextInt();// 수정할 가격 읽기
+						menu.changeMenu(a, n, c);// 메뉴번호에 해당하는 메뉴명&가격 수정
+						System.out.println("<수정된 목록 출력합니다>");
+						menu.showMenu();
+					}else if(n.equals("d") || n.equals("D")) { // "d":기존메뉴 삭제 삭제출력
+						System.out.println("<기존메뉴 삭제> 삭제할 메뉴번호를 입력해 주세요.");
+						int t=sc.nextInt();// 삭제할 메뉴번호 읽기 
+						menu.deleteMenu(t);// 메뉴 삭제
+						System.out.println("삭제후 메뉴목록을 출력합니다.");
+						menu.showMenu();
 					}else if(n.equals("Q")) {
 						break;
 					}else {
@@ -44,8 +58,8 @@ public class Coffeeshop {
 					}
 					n=s.nextLine();
 				}
-					System.out.println("메뉴관리 종료");
-					System.out.println("작업을 선택해 주세요.");
+				System.out.println("메뉴관리 종료");
+					System.out.println("작업을 선택해 주세요."); // 메뉴작업을 선택하시오(...) 출력
 			}else if(n.equals("o") || n.equals("O")) {
 				System.out.println("주문받기");
 			}else if(n.equals("s") || n.equals("S")) {
@@ -55,8 +69,9 @@ public class Coffeeshop {
 			}else {
 				System.out.println("다시 입력해 주세요");
 			}
-			n=s.nextLine();
+			n=s.nextLine(); 	// 새값을 읽는다.
 		}
+			menu.save();
 			System.out.println("프로그램 종료");
 		//menu.load();
 		/*
