@@ -35,10 +35,35 @@ public class Coffeeshop {
 					}
 					n=s.nextLine();
 				}
+				menu.save();
 				System.out.println("메뉴관리 종료");
-					System.out.println("<단축키를 입력해 주세요.> m:메뉴관리,o:주문받기,s:실적받기, 'x'또는'X' 입력시 프로그램 종료"); // 메뉴작업을 선택하시오(...) 출력
+				System.out.println("<단축키를 입력해 주세요.> m:메뉴관리,o:주문받기,s:실적받기, 'x'또는'X' 입력시 프로그램 종료"); // 메뉴작업을 선택하시오(...) 출력
 			}else if(n.equals("o") || n.equals("O")) { // o: 주문
-				System.out.println("주문받기");
+				menu.showMenu();
+				Order order = new Order();
+				System.out.println("주문을 받습니다. 메뉴번호를 선택하세요.");// 출력 "메뉴번호를 선택하세요"
+				n=s.nextLine();// 값을 읽는다.
+				while(!n.equals("=")){ // 메뉴번호가 ""이 아닌동안
+					System.out.println("수량을 입력하세요"); // "수량을 입력하세요" 출력
+					int c=s1.nextInt(); // 값을 읽는다.
+					String mn = menu.getName(n);// 메뉴번호로 메뉴명을 찾아낸다.
+					int p = menu.getPrice(n);// 메뉴번호로 메뉴가격을 찾아낸다.
+					int total =	order.addOrder(mn,p,c);// 주문을 order에 추가.(order.addOrder(메뉴명,가격,수량)
+					System.out.println("총액:"+" "+total);// 반환값 받아서 총액출력
+					// menu.showMenu();
+					System.out.println("");
+					System.out.println("메뉴번호를 선택하세요.'='입력시 합산");// "메뉴번호를 선택하세요" 출력
+					n=s.nextLine();// 값을 읽는다.
+			}
+				System.out.println("<가격을 합산합니다.> (메뉴선택 종료)");
+				int totalSum = order.getTotalSum();
+				System.out.println("전체총액:"+" "+totalSum);// 각메뉴의 총액을 더한 전체총액을 출력(getTotalSum())
+				System.out.println("");
+				System.out.println("모바일번호를 입력하세요(적립)");// "모바일번호를 입력하세요" 출력
+				n=s.nextLine();// 고객의 모바일번호 입력받는다.
+				order.addMobile(n);
+				System.out.println("번호:"+" "+ n);
+				// 실적에 추가한다.(나중에)
 			}else if(n.equals("s") || n.equals("S")) { // s: 실적보기
 				System.out.println("실적받기"); 
 			}else if(n.equals("X")) { // x: 프로그램 종료.

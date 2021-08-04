@@ -43,6 +43,12 @@ public class Menu { // 선언(정의) only. not 실행코드
 	void addPrice(String price) {
 		this.alPrice.add(Integer.parseInt(price));
 	}
+	String getName(String menu_num) {
+		return this.alName.get(Integer.parseInt(menu_num)-1);
+	}
+	Integer getPrice(String price) {
+		return this.alPrice.get(Integer.parseInt(price)-1);
+	}
 	void appendMenu() {
 		Scanner s=new Scanner(System.in);
 		System.out.println("새로운 메뉴를 추가합니다. 새 메뉴명을 입력해 주세요");
